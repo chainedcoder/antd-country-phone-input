@@ -101,9 +101,15 @@ function CountryPhoneInput({
 
   const handlePhoneChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
+
       const currentValue = e.target.value;
-      setPhone(currentValue);
-      triggerChange(currentValue, area);
+      const value  = currentValue;
+      const reg = /^-?\d*(\.\d*)?$/;
+      if ((!isNaN(value as any) && reg.test(value)) || value === '' ) {
+        setPhone(currentValue);
+        triggerChange(currentValue, area);
+      }
+
     },
     [setPhone, area, triggerChange]
   );
